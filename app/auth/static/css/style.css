@@ -1,0 +1,62 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{ padding:0; margin:0; border:0; font-family:"微软雅黑"; font-size:16px}
+ul,li{ list-style:none; padding:0; margin:0}
+a{ text-decoration:none}
+
+
+.nav-top>span{ float:left; height:65px; line-height:65px; display:block; font-family:"方正兰亭粗黑简体"; font-size:28px; font-weight:bold; margin-left:50px}
+.nav-top>.nav-topright{ float:right}
+.nav-top>.nav-topright>p{ float:left; height:65px; line-height:65px; padding:0; margin:0; display:block; margin-right:50px}
+.nav-top>.nav-topright>span{ float:left; display:block; height:65px; line-height:65px; margin-right:20px}
+/*.nav-down{ width:100%; height: auto;position: absolute;z-index: 999}*/
+/*.nav-down{ width:100%; height: 100%}*/
+.nav-down{ width:100%; position: absolute;top: 50px;bottom: 0}
+.leftmenu1{ float:left; width:240px; background:#424f63; height:100%; position:absolute;left:-292px;z-index: 1}
+.leftmenu1 .menu-oc{ position:absolute; margin-left:240px; cursor:pointer}
+.leftmenu1>ul{ float:left; width:240px; height:auto;}
+.leftmenu1>ul>li{ width:240px; float:left; height:auto; position:relative}
+.leftmenu1>ul>li>a{ width:240px; height:45px; float:left; display:block; line-height:45px; color:#FFF; text-indent:2.5em; cursor:pointer; border-top:solid 1px #FFF}
+.leftmenu1>ul>li>a.a_list1{ background:url(../images/ic_grid.png) no-repeat 15px center}
+.leftmenu1>ul>li>a.a_list2{ background:url(../images/ic_user.png) no-repeat 15px center}
+.leftmenu1>ul>li>a.a_list3{ background:url(../images/ic_chats.png) no-repeat 15px center}
+
+.leftmenu1>ul>li>.menu_list{ width:240px; height:auto; float:left; font-size:14px; background:#353f4f;}
+.leftmenu1>ul>li>.menu_list_first{ background:#353f4f;}
+.leftmenu1>ul>li>.menu_list>a{ width:240px; float:left; height:38px; line-height:38px; text-indent:3em; color:#FFF; display:block}
+.leftmenu1>ul>li>.menu_list>a:hover{ background:#2a323f}
+
+
+.leftmenu2{ float:left; width:52px; height:1200px; position:absolute; background:#424f63;left:0px;z-index: 1}
+.leftmenu2 .menu-oc1{ position:absolute; margin-left:52px; cursor:pointer}
+.leftmenu2 ul{ float:left; width:52px; height:auto}
+.leftmenu2>ul>li{ width:52px; float:left; height:auto; position:relative}
+.leftmenu2>ul>li>a{ width:52px; height:45px; float:left; display:block; line-height:45px; color:#FFF; cursor:pointer;}
+.leftmenu2>ul>li>a.j_a_list1{ background:url(../images/ic_grid.png) no-repeat 15px center}
+.leftmenu2>ul>li>a.j_a_list2{ background:url(../images/ic_user.png) no-repeat 15px center}
+.leftmenu2>ul>li>a.j_a_list3{ background:url(../images/ic_chats.png) no-repeat 15px center}
+
+.leftmenu2>ul>li>.j_menu_list{ width:140px; height:auto; float:left; font-size:14px; background:#353f4f; position:absolute; margin-left:52px; display:none}
+.leftmenu2>ul>li>.j_menu_list>span{ display:block; float:left; margin-left:-52px; width:192px; height:45px;  color:#FFF; line-height:45px; text-indent:6.5em}
+.leftmenu2>ul>li>.j_menu_list>span>i{ width:52px; height:45px; float:left; position:absolute; cursor:pointer; display:block;border-right:solid 1px #FFF}
+.sp1{ background:url(../images/ic_grid.png) no-repeat 15px center #65cea7;}
+.sp2{ background:url(../images/ic_user.png) no-repeat 15px center #65cea7}
+.sp3{ background:url(../images/ic_chats.png) no-repeat 15px center #65cea7}
+.leftmenu2>ul>li>.j_menu_list>a{ width:140px; float:left; height:38px; line-height:38px; text-indent:3em; color:#FFF; display:block}
+.leftmenu2>ul>li>.j_menu_list>a:hover{ background:#2a323f}
+
+
+.rightcon{ margin-left:55px; height: 100% }
+.rightcon .right_con{ width:100%; margin:auto; display:table}
+.rightcon .right_con>p{ margin:0; margin-top:10px; width:100%; display:block}
+
+
+
+
+
+
+
+
+
+
+

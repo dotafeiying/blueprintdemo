@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'telecom.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'telecom.ico') }}" type="image/x-icon">
+
+    
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        /*#result{position: absolute;z-index: 2}*/
+        .navbar.navbar-default{
+            margin-bottom:0;
+            border:none;
+            background-color:#293c55;
+        }
+        /*#result{top: 50px}*/
+        #main{left:0;right:0;top: 50px;bottom:0;position: absolute;}
+        /*#allmap{left:0;right:0;top: 0;bottom:0;position: absolute;height: 100%;z-index: 100}*/
+        .navbar.navbar-default .navbar-nav > li > a{color: #efefef}
+        .navbar.navbar-default .navbar-nav > li > a:hover{background-color: #0e151f;color: #f3f3f3}
+        .navbar.navbar-default .navbar-nav > li > a:focus{background-color: #0e151f;color: #f3f3f3}
+        .navbar.navbar-default .navbar-nav > li > a:active{background-color: #162436;color: #efefef}
+        .navbar-header > a >span{color: #fff;font-size: 24px}
+        .nav-top{border-top: 2px solid #cc374b !important;} 
+
+        #allmap1 {width: 100%;height: 100%;overflow: hidden;font-family:"微软雅黑"; }
+        #nav-container{position: absolute;left:180px;right: 30px}
+
+    </style>
+    <link href="./static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <!-- <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="./static/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./static/js/jquery-1.11.2.min.js"></script>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GygcEB3Vw3NOYWlHDq1KOOz2vI0C2ZCG"></script>
+    <script type="text/javascript" src="./static/js/echarts.js"></script>
+    <!-- // <script type="text/javascript" src="./static/echarts3/echarts.js"></script> -->
+    <script src="http://gallery.echartsjs.com/dep/echarts/latest/extension/bmap.min.js"></script>
+    <!-- /**/<script src="./static/js/bmap.min.js"></script> -->
+
+    <script src="./static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="static/js/index.js"></script>
+
+    <!-- // <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script> -->
+
+    <!--加载鼠标绘制工具-->
+    <!-- // <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script> -->
+    <!-- <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" /> -->
+  
+    <title>首页</title>
+</head>
+<body>
+
+    <div class="navbar navbar-default navbar-static-top nav-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><span>后台管理系统</span></a>
+            </div>
+            <div id="top" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <div id="nav-container">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li><a href="javascript:;" onclick="openHeatmap();"><span class="icon icon-script" alt="显示热力图"></span>显示热力图</a></li>
+                            <li><a href="javascript:;" onclick="closeHeatmap();">关闭热力图</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="javascript:;" onclick="openHeatmap();"><span class="icon icon-script" alt="显示热力图"></span>显示热力图</a></li>
+                            <li><a data-toggle="tooltip" data-placement="bottom" title="以 xlsx 格式下载结果" href="javascript:void(0)" onclick="javascript:window.location.href='/data_save'"><i class="fa fa-file-excel-o"></i>&nbsp;保存
+                            </a></li>
+                        </ul
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="navbar navbar-default navbar-static-top nav-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><span>后台管理系统</span></a>
+            </div>
+            <div id="top" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:;" onclick="openHeatmap();"><span class="icon icon-script" alt="显示热力图"></span>显示热力图</a></li>
+                    <li><a href="javascript:;" onclick="closeHeatmap();">关闭热力图</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="javascript:;" onclick="openHeatmap();"><span class="icon icon-script" alt="显示热力图"></span>显示热力图</a></li>
+                    <li><a data-toggle="tooltip" data-placement="bottom" title="以 xlsx 格式下载结果" href="javascript:void(0)" onclick="javascript:window.location.href='/data_save'"><i class="fa fa-file-excel-o"></i>&nbsp;保存
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="nav-down">
+        <div class="leftmenu1">
+            <div class="menu-oc"><img src="static/html/images/menu-all.png" /></div>
+            <ul>
+                <li>
+                    <a class="a_list a_list1">全局设置</a>
+                    <div class="menu_list menu_list_first">
+                        <a class="lista_first" href="#">基本设置</a>
+                        <a href="#">其他设置</a>
+                        <a href="#">界面风格</a>
+                        <a href="#">系统工具</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="a_list a_list2">权限管理</a>
+                    <div class="menu_list">
+                        <a href="#">基本权限</a>
+                        <a href="#">分配权限</a>
+                        <a href="#">权限管理</a>
+                        <a href="#">成员管理</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="a_list a_list3">新闻管理</a>
+                    <div class="menu_list">
+                        <a href="#">新闻中心</a>
+                        <a href="#">添加新闻</a>
+                        <a href="#">修改新闻</a>
+                        <a href="#">删除新闻</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="a_list a_list3">新闻管理</a>
+                    <div class="menu_list">
+                        <a href="#">新闻中心</a>
+                        <a href="#">添加新闻</a>
+                        <a href="#">修改新闻</a>
+                        <a href="#">删除新闻</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="leftmenu2">
+            <div class="menu-oc1"><img src="static/html/images/menu-all.png" /></div>
+            <ul>
+                <li>
+                    <a class="j_a_list j_a_list1"></a>
+                    <div class="j_menu_list j_menu_list_first">
+                        <span class="sp1"><i></i>全局设置</span>
+                        <a class="j_lista_first" href="#">基本设置</a>
+                        <a href="#">其他设置</a>
+                        <a href="#">界面风格</a>
+                        <a href="#">系统工具</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="j_a_list j_a_list2"></a>
+                    <div class="j_menu_list">
+                        <span class="sp2"><i></i>权限管理</span>
+                        <a href="#">基本权限</a>
+                        <a href="#">分配权限</a>
+                        <a href="#">权限管理</a>
+                        <a href="#">成员管理</a>
+                    </div>
+                </li>
+                <li>
+                    <a class="j_a_list j_a_list3"></a>
+                    <div class="j_menu_list">
+                        <span class="sp3"><i></i>权限管理</span>
+                        <a href="#">基本权限</a>
+                        <a href="#">分配权限</a>
+                        <a href="#">权限管理</a>
+                        <a href="#">成员管理</a>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+        <div class="rightcon">
+                <div id="allmap"></div>
+                <!-- <p style="text-align:left; margin-top:50px">右侧内容自适应哦！我是左对齐</p>
+                <p style="text-align:center">右侧内容自适应哦！我是居中</p>
+                <p style="text-align:right">右侧内容自适应哦！我是右对齐</p>
+                <h1>我是标题1。。。</h1>
+                <h2>我是标题2。。。</h2>
+                <h3>我是标题3。。。</h3>
+                <h4>我是标题4。。。</h4>
+                <h5>我是标题5。。。</h5> -->
+        </div>
+    </div>
+
+    <!-- <div id='main'>
+        <div id="allmap1"></div>
+    </div> -->
+    <!-- <div id="content" style="float: left; height: 100%; width: 100%;">
+        <div id="allmap1"></div>
+    </div> -->
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    // var map = new BMap.Map("allmap");
+    // map.enableScrollWheelZoom();//开启滚动缩放
+    // map.enableContinuousZoom();//开启缩放平滑
+    // var pt =new BMap.Point(116.400, 39.914);
+    // map.centerAndZoom('武汉市',15);  //初始化地图,设置城市和地图级别。
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('allmap'));
+    app={};
+    option = null;
+    app.title = '热力图与百度地图扩展';
+
+    myChart.showLoading();
+
+    $.getJSON('/get_data', function (data) {
+        console.log(data)
+
+        var points = [].concat(data.map(function (track) {
+            return [track.lng,track.lat,track.count]
+        }));
+        console.log(points)
+        myChart.hideLoading();
+        myChart.setOption(option = {
+            title:{
+                text:'大数据',
+                subtext: '纯属虚构',
+                left:'center'
+            },
+            animation: false,
+            bmap: {
+                center: [113.13066322374, 30.240018034923],
+                // center: '湖北',
+                zoom: 8,
+                roam: true
+            },
+            visualMap: {
+                //show: false,
+                text: ['高','低'],
+                top: 'bottom',
+                min: 0,
+                max: 5,
+                seriesIndex: 0,
+                calculable: true,
+                inRange: {
+                    color: ['blue', 'blue', 'green', 'yellow', 'red']
+                }
+            },
+            series: [{
+                type: 'heatmap',
+                coordinateSystem: 'bmap',
+                data: points,
+                pointSize: 5,
+                blurSize: 6
+            }]
+        });
+        if (!app.inNode) {
+            // 添加百度地图插件
+            var bmap = myChart.getModel().getComponent('bmap').getBMap();
+            bmap.addControl(new BMap.MapTypeControl());
+        }
+    });
+
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+
+    function openHeatmap(){
+        myChart.setOption(option, true);
+    }
+
+    function closeHeatmap(){
+        myChart.clear();
+    }
+</script>
+
+<script type="text/javascript">
+/*var map1 = new BMap.Map("allmap1");    // 创建Map实例
+map1.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+map1.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+map1.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+map1.enableScrollWheelZoom(true);*/
+</script>
+<script type="text/javascript">
+$(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+

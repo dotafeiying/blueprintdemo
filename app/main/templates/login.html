@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<html lang="zh-CN">
+<head>
+    <title>登录页面</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+</head>
+<body class="login1">
+      <form method="post" action="">
+          <input class="form-control" placeholder="Username" type="text" name="username"><br>
+          <input class="form-control" placeholder="Password" type="text" name="password"><br>
+            <label class="checkbox"><input type="checkbox"><span>Remember me</span>&nbsp;&nbsp;&nbsp;
+            {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            {% if messages %}
+            <span style="color:red;">
+            {% for message in messages %}
+                {{ message }}
+                <!-- <div class="alert alert-warning">{{ message }} </div> -->
+            {% endfor %}
+            </span>
+            {% endif %}
+            {% endwith %}</label>
+        <div class="form-group">
+          <button class="btn btn-lg btn-block btn-primary" type="submit" value="submit">登 录</button>
+        </div>
+      </form>
+      <div class="social-login clearfix">
+        <!-- <input type="submit" class="btn btn-lg btn-block btn-primary" value="submit"> -->
+      </div>
+    </div>
+  </div>
+  <!-- End Login Screen -->
+</body>
+</html>

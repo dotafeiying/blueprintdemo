@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+  
+    <title>首页</title>
+</head>
+<body>
+
+    <div>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('auth.logout') }}" style="color: red">退出</a>
+        {% endif %}
+    </div>
+    <div>
+        Hello,
+        {% if current_user.is_authenticated %}
+            {{ current_user.username }}
+        {% else %}
+            Stranger
+        {% endif %}!
+    </div>
+    <p><a href="{{ url_for('.admin') }}">管理员界面</a></p>
+    <p><a href="{{ url_for('.forbid') }}">forbid界面</a></p>
+    <p><a href="{{ url_for('main.main_index', username=current_user.username) }}">欢迎页面</a></p>
+    <p><a href="{{ url_for('auth.main_index', username=current_user.username) }}">欢迎页面</a></p>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body>
+<p>hello</p>
+<script>
+console.log("setting sse handlers")
+viewEventSource = new EventSource("{{ url_for('view_event_request') }}");
+viewEventSource.onmessage = handleViewEvent;
+
+function handleViewEvent(event){
+    console.log("called handle view event")
+    console.log(event);
+}
+</script>
+</body>
+</html>

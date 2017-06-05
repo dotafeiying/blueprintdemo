@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'telecom.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'telecom.ico') }}" type="image/x-icon">
+    <title>错误页面</title>
+</head>
+<body>
+    <p>你没有管理员权限！</p>
+    <a href="{{ url_for('auth.logout') }}">请点击</a>
+</body>
+</html>
