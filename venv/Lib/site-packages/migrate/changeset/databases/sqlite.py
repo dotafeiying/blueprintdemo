@@ -54,7 +54,7 @@ class SQLiteHelper(SQLiteCommon):
 
         data = table.metadata.bind.execute(
             """SELECT sql
-               FROM sqlite_master
+               FROM sqlite_main
                WHERE
                    type='table' AND
                    name=:table_name""",

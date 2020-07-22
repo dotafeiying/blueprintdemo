@@ -63,7 +63,7 @@ FLAGS = {
 }
 
 class Pattern:
-    # master pattern object.  keeps track of global attributes
+    # main pattern object.  keeps track of global attributes
     def __init__(self):
         self.flags = 0
         self.open = []
