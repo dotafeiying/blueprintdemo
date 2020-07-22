@@ -1152,17 +1152,17 @@ class SQLiteDialect(default.DefaultDialect):
     def get_table_names(self, connection, schema=None, **kw):
         if schema is not None:
             qschema = self.identifier_preparer.quote_identifier(schema)
-            master = '%s.sqlite_master' % qschema
+            main = '%s.sqlite_main' % qschema
         else:
-            master = "sqlite_master"
+            main = "sqlite_main"
         s = ("SELECT name FROM %s "
-             "WHERE type='table' ORDER BY name") % (master,)
+             "WHERE type='table' ORDER BY name") % (main,)
         rs = connection.execute(s)
         return [row[0] for row in rs]
 
     @reflection.cache
     def get_temp_table_names(self, connection, **kw):
-        s = "SELECT name FROM sqlite_temp_master "\
+        s = "SELECT name FROM sqlite_temp_main "\
             "WHERE type='table' ORDER BY name "
         rs = connection.execute(s)
 
@@ -1170,7 +1170,7 @@ class SQLiteDialect(default.DefaultDialect):
 
     @reflection.cache
     def get_temp_view_names(self, connection, **kw):
-        s = "SELECT name FROM sqlite_temp_master "\
+        s = "SELECT name FROM sqlite_temp_main "\
             "WHERE type='view' ORDER BY name "
         rs = connection.execute(s)
 
@@ -1185,11 +1185,11 @@ class SQLiteDialect(default.DefaultDialect):
     def get_view_names(self, connection, schema=None, **kw):
         if schema is not None:
             qschema = self.identifier_preparer.quote_identifier(schema)
-            master = '%s.sqlite_master' % qschema
+            main = '%s.sqlite_main' % qschema
         else:
-            master = "sqlite_master"
+            main = "sqlite_main"
         s = ("SELECT name FROM %s "
-             "WHERE type='view' ORDER BY name") % (master,)
+             "WHERE type='view' ORDER BY name") % (main,)
         rs = connection.execute(s)
 
         return [row[0] for row in rs]
@@ -1198,20 +1198,20 @@ class SQLiteDialect(default.DefaultDialect):
     def get_view_definition(self, connection, view_name, schema=None, **kw):
         if schema is not None:
             qschema = self.identifier_preparer.quote_identifier(schema)
-            master = '%s.sqlite_master' % qschema
+            main = '%s.sqlite_main' % qschema
             s = ("SELECT sql FROM %s WHERE name = '%s'"
-                 "AND type='view'") % (master, view_name)
+                 "AND type='view'") % (main, view_name)
             rs = connection.execute(s)
         else:
             try:
                 s = ("SELECT sql FROM "
-                     " (SELECT * FROM sqlite_master UNION ALL "
-                     "  SELECT * FROM sqlite_temp_master) "
+                     " (SELECT * FROM sqlite_main UNION ALL "
+                     "  SELECT * FROM sqlite_temp_main) "
                      "WHERE name = '%s' "
                      "AND type='view'") % view_name
                 rs = connection.execute(s)
             except exc.DBAPIError:
-                s = ("SELECT sql FROM sqlite_master WHERE name = '%s' "
+                s = ("SELECT sql FROM sqlite_main WHERE name = '%s' "
                      "AND type='view'") % view_name
                 rs = connection.execute(s)
 
@@ -1545,13 +1545,13 @@ class SQLiteDialect(default.DefaultDialect):
     def _get_table_sql(self, connection, table_name, schema=None, **kw):
         try:
             s = ("SELECT sql FROM "
-                 " (SELECT * FROM sqlite_master UNION ALL "
-                 "  SELECT * FROM sqlite_temp_master) "
+                 " (SELECT * FROM sqlite_main UNION ALL "
+                 "  SELECT * FROM sqlite_temp_main) "
                  "WHERE name = '%s' "
                  "AND type = 'table'") % table_name
             rs = connection.execute(s)
         except exc.DBAPIError:
-            s = ("SELECT sql FROM sqlite_master WHERE name = '%s' "
+            s = ("SELECT sql FROM sqlite_main WHERE name = '%s' "
                  "AND type = 'table'") % table_name
             rs = connection.execute(s)
         return rs.scalar()

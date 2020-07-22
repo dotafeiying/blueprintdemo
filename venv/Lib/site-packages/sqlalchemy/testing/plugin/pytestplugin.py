@@ -37,15 +37,15 @@ def pytest_addoption(parser):
 
 
 def pytest_configure(config):
-    if hasattr(config, "slaveinput"):
-        plugin_base.restore_important_follower_config(config.slaveinput)
+    if hasattr(config, "subordinateinput"):
+        plugin_base.restore_important_follower_config(config.subordinateinput)
         plugin_base.configure_follower(
-            config.slaveinput["follower_ident"]
+            config.subordinateinput["follower_ident"]
         )
 
         if config.option.write_idents:
             with open(config.option.write_idents, "a") as file_:
-                file_.write(config.slaveinput["follower_ident"] + "\n")
+                file_.write(config.subordinateinput["follower_ident"] + "\n")
     else:
         if config.option.write_idents and \
                 os.path.exists(config.option.write_idents):
@@ -71,18 +71,18 @@ if has_xdist:
     import uuid
 
     def pytest_configure_node(node):
-        # the master for each node fills slaveinput dictionary
+        # the main for each node fills subordinateinput dictionary
         # which pytest-xdist will transfer to the subprocess
 
-        plugin_base.memoize_important_follower_config(node.slaveinput)
+        plugin_base.memoize_important_follower_config(node.subordinateinput)
 
-        node.slaveinput["follower_ident"] = "test_%s" % uuid.uuid4().hex[0:12]
+        node.subordinateinput["follower_ident"] = "test_%s" % uuid.uuid4().hex[0:12]
         from sqlalchemy.testing import provision
-        provision.create_follower_db(node.slaveinput["follower_ident"])
+        provision.create_follower_db(node.subordinateinput["follower_ident"])
 
     def pytest_testnodedown(node, error):
         from sqlalchemy.testing import provision
-        provision.drop_follower_db(node.slaveinput["follower_ident"])
+        provision.drop_follower_db(node.subordinateinput["follower_ident"])
 
 
 def pytest_collection_modifyitems(session, config, items):
